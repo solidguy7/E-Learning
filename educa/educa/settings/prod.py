@@ -1,4 +1,4 @@
-from base import *
+from .base import *
 
 DEBUG = False
 
@@ -8,7 +8,6 @@ ADMINS = [
 
 ALLOWED_HOSTS = ['*']
 
-DATABASES = {
-    'default': {
-    }
-}
+REDIS_URL = 'redis://redis:6379'
+CACHES['default']['LOCATION'] = REDIS_URL
+CHANNEL_LAYERS['default']['CONFIG']['hosts'] = [REDIS_URL]
