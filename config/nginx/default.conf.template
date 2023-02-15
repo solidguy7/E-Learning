@@ -5,7 +5,15 @@ upstream uwsgi_app {
 
 server {
     listen 80;
-    server_name www.educaproject.com educaproject.com;
+    server_name www.myeducaproject.com myeducaproject.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    ssl_certificate /code/educa/ssl/educa.crt;
+    ssl_certificate_key /code/educa/ssl/educa.key;
+    server_name www.myeducaproject.com myeducaproject.com;
     error_log stderr warn;
     access_log /dev/stdout main;
 
