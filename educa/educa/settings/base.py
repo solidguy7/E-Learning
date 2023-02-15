@@ -163,3 +163,5 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+STATIC_ROOT = BASE_DIR / 'static'

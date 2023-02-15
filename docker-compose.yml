@@ -10,12 +10,10 @@ services:
       - POSTGRES_PASSWORD=postgres
   web:
     build: .
-    command: ["./wait-for-it.sh", "db:5432", "--", "python", "/code/educa/manage.py", "runserver", "0.0.0.0:8000"]
+    command: ["./wait-for-it.sh", "db:5432", "--", "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
     restart: always
     volumes:
       - .:/code
-    ports:
-      - "8000:8000"
     environment:
       - DJANGO_SETTINGS_MODULE=educa.settings.prod
       - POSTGRES_NAME=postgres
@@ -41,3 +39,11 @@ services:
 #    volumes:
 #      - ./data:/data
 #      - ./redis.conf:/usr/local/etc/redis/redis.conf
+  nginx:
+    image: nginx
+    restart: always
+    volumes:
+      - ./config/nginx:/etc/nginx/templates
+      - .:/code
+    ports:
+      - "80:80"

@@ -6,7 +6,7 @@ ADMINS = [
     ('solidguy7', ''),
 ]
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['myeducaproject.com', 'www.myeducaproject.com']
 
 REDIS_URL = 'redis://redis:6379'
 CACHES['default']['LOCATION'] = REDIS_URL
